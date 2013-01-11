@@ -57,3 +57,7 @@ a solution exists.
 PhasePlaneTCL.m
 Solves the Target Cell Limited Model and outputs a phase plane plot of a pair of the model
 variables e.g. T against V. Takes two inputs, which indicate which variables to plot.
+
+Nullclines.m
+Reproduces the graph in Fig.3 for the nullclines of the Extended Model with Quasi Steady State Assumption
+
