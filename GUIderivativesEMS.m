@@ -5,10 +5,10 @@ function GUIderivativesEMS()
 
 close all
 
-global sliderp sliderbeta sliderc sliderk h g model E1 E2 E3 E4 E5 E6;
+global sliderp sliderbeta sliderc sliderk slidertheta h g model E1 E2 E3 E4 E5 E6;
 
 %Make a large Figure
-figure('position',[0 0 1600 900], 'name','Simplified Extended Model', 'NumberTitle', 'off');
+figure('position',[0 0 1600 900], 'name','Parameter Sliders and Instability Analysis', 'NumberTitle', 'off');
 
 %Make subplot to hold first plot
 h=subplot('position',[0.1 0.4 0.4 0.5]);
@@ -18,7 +18,7 @@ g=subplot('position',[0.55 0.4 0.4 0.5]);
 
 %Make a popup menu to choose which model
 model=uicontrol('Style','popupmenu','String','Target Cell Limited|Extended Model|Extended Simplified Model',...
-    'Position',[50 50 150 30], 'Callback', @PlotGUI);
+    'Position',[770 290 150 30], 'Callback', @PlotGUI);
 
 %Place a box around the stability analysis part
 uipanel('Title', 'Stability Analysis', 'BackgroundColor', 'white', ...
@@ -31,30 +31,37 @@ E4 = uicontrol('Style','text','String','Stability Parameter','Position',[1150 20
 E5 = uicontrol('Style', 'text', 'String', '-', 'Position', [1250 200 60 20]);
 E6 = uicontrol('Style', 'text', 'String','-',...
             'Position', [1350 200 100 30]);
+        
 %Label the p slider
-uicontrol('Style','text','String','p: Virus Production Rate','Position',[600 200 100 30]);
+uicontrol('Style','text','String','p: Virus Production Rate','Position',[600 250 100 30]);
 
 %Label the beta slider
-uicontrol('Style','text','String','beta: Target Cell Infection Rate Constant','Position',[600 150 100 30]);
+uicontrol('Style','text','String','beta: Target Cell Infection Rate Constant','Position',[600 200 100 30]);
 
 %Label the c slider
-uicontrol('Style','text','String','c: Virus Clearance Rate','Position',[600 100 100 30]);
+uicontrol('Style','text','String','c: Virus Clearance Rate','Position',[600 150 100 30]);
 
 %Label the k slider
-uicontrol('Style','text','String','k: Depletion Rate of Infected Cells by Effector Cells','Position',[600 50 100 30]);
+uicontrol('Style','text','String','k: Depletion Rate of Infected Cells by Effector Cells','Position',[600 100 100 30]);
+
+%Label the theta slider
+uicontrol('Style','text','String','theta: Half Maximal Effector Cell Stimulation Threshhold','Position',[600 50 100 30]);
 
 
 %Make the sliders
-sliderp=uicontrol('Style','slider','Min',0,'Max',5000,'Position', [750 200 200 30],...
+sliderp=uicontrol('Style','slider','Min',0,'Max',5000,'Position', [750 250 200 30],...
     'Callback', @PlotGUI);
 
-sliderbeta=uicontrol('Style','slider','Min',0,'Max',1e-5,'Position', [750 150 200 30],...
+sliderbeta=uicontrol('Style','slider','Min',0,'Max',1e-5,'Position', [750 200 200 30],...
     'Callback', @PlotGUI);
 
-sliderc=uicontrol('Style','slider','Min',0,'Max',100,'Position', [750 100 200 30],...
+sliderc=uicontrol('Style','slider','Min',0,'Max',100,'Position', [750 150 200 30],...
     'Callback', @PlotGUI);
 
-sliderk=uicontrol('Style','slider','Min',0,'Max',10,'Position', [750 50 200 30],...
+sliderk=uicontrol('Style','slider','Min',0,'Max',10,'Position', [750 100 200 30],...
+    'Callback', @PlotGUI);
+
+slidertheta=uicontrol('Style','slider','Min',0,'Max',10,'Position', [750 50 200 30],...
     'Callback', @PlotGUI);
 
 % Call the function to solve
@@ -63,7 +70,7 @@ function PlotGUI(hObject, eventdata)
 
 clear
 
-global sliderp sliderbeta sliderc sliderk h g model E1 E2 E3 E4 E5 E6;
+global sliderp sliderbeta sliderc sliderk slidertheta h g model E1 E2 E3 E4 E5 E6;
 
 params;
 
@@ -82,17 +89,23 @@ param.c= get(sliderc,'Value');
 %Get value for parameter k from the slider
 param.k= get(sliderk,'Value');
 
+%Get value for parameter theta from the slider
+param.theta= get(slidertheta,'Value');
+
 % Put Value of p on the GUI
-uicontrol('Style', 'text', 'String', num2str(param.p), 'Position', [1000 200 60 20]);
+uicontrol('Style', 'text', 'String', num2str(param.p), 'Position', [1000 250 60 20]);
 
 % Put Value of beta on the GUI
-uicontrol('Style', 'text', 'String', num2str(param.beta), 'Position', [1000 150 60 20]);
+uicontrol('Style', 'text', 'String', num2str(param.beta), 'Position', [1000 200 60 20]);
 
-% Put Value of p on the GUI
-uicontrol('Style', 'text', 'String', num2str(param.c), 'Position', [1000 100 60 20]);
+% Put Value of c on the GUI
+uicontrol('Style', 'text', 'String', num2str(param.c), 'Position', [1000 150 60 20]);
 
 % Put Value of k on the GUI
-uicontrol('Style', 'text', 'String', num2str(param.k), 'Position', [1000 50 60 20]);
+uicontrol('Style', 'text', 'String', num2str(param.k), 'Position', [1000 100 60 20]);
+
+% Put Value of theta on the GUI
+uicontrol('Style', 'text', 'String', num2str(param.theta), 'Position', [1000 50 60 20]);
 
 %Choose which model to plot and solve, call appropriate Eigenvalue analysis
 if menuchoice ==1
@@ -153,9 +166,10 @@ end
 plot(h, t, y(:,1), 'r', t, y(:,2), 'g');
 xlabel(h, 'time(days)')
 ylabel(h, 'cell count/ml')
-title(h, 'Extended Simplified Model')
+title(h, 'Target and Infected Cells')
 legend(h, 'targets', 'infected') 
 
 semilogy(g, t, y(:,3), 'k');
 xlabel(g, 'time(days)')
 ylabel(g, 'virus titer')
+title(g, 'Virus Titer')
