@@ -5,7 +5,7 @@ function GUIderivativesEMS()
 
 close all
 
-global sliderp sliderbeta sliderc sliderk h g model;
+global sliderp sliderbeta sliderc sliderk h g model E1 E2 E3 E4 E5 E6;
 
 %Make a large Figure
 figure('position',[0 0 1600 900], 'name','Simplified Extended Model', 'NumberTitle', 'off');
@@ -20,9 +20,17 @@ g=subplot('position',[0.55 0.4 0.4 0.5]);
 model=uicontrol('Style','popupmenu','String','Target Cell Limited|Extended Model|Extended Simplified Model',...
     'Position',[50 50 150 30], 'Callback', @PlotGUI);
 
-%Label for stability analysis 
-uicontrol('Style','text','String','Stability Analysis','Position',[1250 250 100 30]);
-
+%Place a box around the stability analysis part
+uipanel('Title', 'Stability Analysis', 'BackgroundColor', 'white', ...
+    'Position', [0.67 0.05 0.25 0.25])
+%place Eigenvalue labels in GUI
+E1 = uicontrol('Style', 'text', 'String', 'E1', 'Position', [1250 150 60 20]);
+E2 = uicontrol('Style', 'text', 'String', 'E2', 'Position', [1250 100 60 20]);
+E3 = uicontrol('Style', 'text', 'String', 'Stable/Unstable', 'Position', [1350 125 100 20]);
+E4 = uicontrol('Style','text','String','Stability Parameter','Position',[1150 200 60 30]);
+E5 = uicontrol('Style', 'text', 'String', '-', 'Position', [1250 200 60 20]);
+E6 = uicontrol('Style', 'text', 'String','-',...
+            'Position', [1350 200 100 30]);
 %Label the p slider
 uicontrol('Style','text','String','p: Virus Production Rate','Position',[600 200 100 30]);
 
@@ -55,12 +63,12 @@ function PlotGUI(hObject, eventdata)
 
 clear
 
-global sliderp sliderbeta sliderc sliderk h g model;
+global sliderp sliderbeta sliderc sliderk h g model E1 E2 E3 E4 E5 E6;
 
 params;
 
 %Use different model depending on menu choice
-menuchoice = get(model, 'Value')
+menuchoice = get(model, 'Value');
 
 %Get value for parameter p from the slider
 param.p= get(sliderp,'Value');
@@ -83,41 +91,63 @@ uicontrol('Style', 'text', 'String', num2str(param.beta), 'Position', [1000 150 
 % Put Value of p on the GUI
 uicontrol('Style', 'text', 'String', num2str(param.c), 'Position', [1000 100 60 20]);
 
-% Put Value of p on the GUI
+% Put Value of k on the GUI
 uicontrol('Style', 'text', 'String', num2str(param.k), 'Position', [1000 50 60 20]);
 
 %Choose which model to plot and solve, call appropriate Eigenvalue analysis
 if menuchoice ==1
-    uicontrol('Style','text','String','R=','Position',[1250 200 60 20]);
+    set(E4, 'String', 'R =');
     [t,y]=ode45(@derivativesTCL, [0 250], [1e4, 0, 1e-6 ], [], param);
     [R, eigVal] = EigenvaluesTCL(param);
     
     %label the stability criteria parameter
-    uicontrol('Style', 'text', 'String', num2str(eigVal(2,2)), 'Position', [1300 150 60 20]);
-    uicontrol('Style', 'text', 'String', num2str(eigVal(1,1)), 'Position', [1300 100 60 20]);
     
-    uicontrol('Style', 'text', 'String', num2str(R), 'Position', [1300 200 60 20]);
+    set(E5, 'String', num2str(R));
     if(R>1) 
-        uicontrol('Style', 'text', 'String','R>1: A stable infective state exists',...
-            'Position', [1400 200 100 30]);
+        set(E6, 'String','R>1: A stable infective state exists');
+        if(real(eigVal(1,1)) < 0 && real(eigVal(2,2)) < 0)
+        set(E3, 'String', 'Stable');
+        else
+        set(E3, 'String', 'Unstable');
+        end
+        set(E1, 'String', num2str(real(eigVal(1,1))));
+        set(E2, 'String', num2str(real(eigVal(2,2))));
+
     else
-        uicontrol('Style', 'text', 'String','R<1: No stable infective state exists',...
-            'Position', [1400 200 100 30]);
-    end
-    %checks to see if is a stable paramter set
-    if(real(eigVal(1,1)) < 0 && real(eigVal(2,2)) < 0)
-        uicontrol('Style', 'text', 'String', 'Stable', 'Position', [1400 125 100 20]);
-    else
-         uicontrol('Style', 'text', 'String', 'Unstable', 'Position', [1400 125 100 20]);
+        set(E6, 'String','R<1: No stable infective state exists');
+        set(E1, 'String', 'E1');
+        set(E2, 'String', 'E2');
     end
     
 elseif menuchoice==2
+    set(E1, 'String', num2str(real(eigVal(1,1))));
+    set(E4, 'String', 'Stability Parameter');
     [t,y]=ode45(@derivativesEM, [0 250], [1e4, 0, 1e-6, 10 ], [], param);
     
 elseif menuchoice ==3
 %Solve the ODEs using function derivativesEMS
+    set(E4, 'String', 'sigma=');
     [t,y]=ode45(@derivativesEMS, [0 250], [1e4, 0, 1e-6 ], [], param);
+    [sigma, eigVal] = EigenvalueQS(param);
+    
+    set(E5, 'String', num2str(sigma));
+    
+    if(sigma>1) 
+        set(E6, 'String','sigma>1: A stable infective state exists');
+        if(real(eigVal(1)) < 0 && real(eigVal(2)) < 0)
+        set(E3, 'String', 'Stable');
+        else
+        set(E3, 'String', 'Unstable');
+        end
+        set(E1, 'String', num2str(real(eigVal(1))));
+        set(E2, 'String', num2str(real(eigVal(2))));
 
+    else
+        set(E6, 'String','sigma<1: No stable infective state exists');
+        set(E1, 'String', 'E1');
+        set(E2, 'String', 'E2');
+    end
+    
 end
 
 plot(h, t, y(:,1), 'r', t, y(:,2), 'g');
