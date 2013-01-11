@@ -9,7 +9,7 @@ function [ dy ] = derivativesEMS( t, y, param )
 
 dy=zeros(3,1);
 dy(1) = param.s-param.d*y(1)-param.beta*y(1)*y(3);
-dy(2) = param.beta*y(1)*y(3)-(param.alpha*param.d + param.k0 * y(2)/(y(2)+param.theta)) *y(2);
+dy(2) = param.beta*y(1)*y(3)-(param.alpha*param.d + param.k * y(2)/(y(2)+param.theta)) *y(2);
 dy(3) = param.p*y(2)-param.c*y(3);
 
 end

@@ -10,9 +10,8 @@ param.d = 0.01;
 param.beta = 1.3e-6;
 
 %infected cell loss rate
-param.delta = 0.1;
-param.delta1 = 0.5;
-param.delta2 = 1.0;
+param.delta = 0.5;
+
 
 %virus production rate
 param.p = 1000;
