@@ -48,6 +48,12 @@ Limited Model is stable. Does this by checking for eigenvalues of the jacobian w
 real part. A test like this function will eventually be incorporated into our GUI, giving 
 info on stability of fixed points as soon as parameters are entered.
 
+EigenvaluesQS.m
+For given paramaters, calculates whether a steady infective state exists or not in the Extended Model with 
+Quasi Steady State Assumption. Plots the stability criterion graph Appendix B on paper, to see if a root and hence
+a solution exists. 
+
+
 PhasePlaneTCL.m
 Solves the Target Cell Limited Model and outputs a phase plane plot of a pair of the model
 variables e.g. T against V. Takes two inputs, which indicate which variables to plot.
