@@ -20,6 +20,9 @@ g=subplot('position',[0.55 0.4 0.4 0.5]);
 model=uicontrol('Style','popupmenu','String','Target Cell Limited|Extended Model|Extended Simplified Model',...
     'Position',[50 50 150 30], 'Callback', @PlotGUI);
 
+%Label for stability analysis 
+uicontrol('Style','text','String','Stability Analysis','Position',[1250 250 100 30]);
+
 %Label the p slider
 uicontrol('Style','text','String','p: Virus Production Rate','Position',[600 200 100 30]);
 
@@ -83,15 +86,37 @@ uicontrol('Style', 'text', 'String', num2str(param.c), 'Position', [1000 100 60 
 % Put Value of p on the GUI
 uicontrol('Style', 'text', 'String', num2str(param.k), 'Position', [1000 50 60 20]);
 
+%Choose which model to plot and solve, call appropriate Eigenvalue analysis
 if menuchoice ==1
+    uicontrol('Style','text','String','R=','Position',[1250 200 60 20]);
     [t,y]=ode45(@derivativesTCL, [0 250], [1e4, 0, 1e-6 ], [], param);
-
+    [R, eigVal] = EigenvaluesTCL(param);
+    
+    %label the stability criteria parameter
+    uicontrol('Style', 'text', 'String', num2str(eigVal(2,2)), 'Position', [1300 150 60 20]);
+    uicontrol('Style', 'text', 'String', num2str(eigVal(1,1)), 'Position', [1300 100 60 20]);
+    
+    uicontrol('Style', 'text', 'String', num2str(R), 'Position', [1300 200 60 20]);
+    if(R>1) 
+        uicontrol('Style', 'text', 'String','R>1: A stable infective state exists',...
+            'Position', [1400 200 100 30]);
+    else
+        uicontrol('Style', 'text', 'String','R<1: No stable infective state exists',...
+            'Position', [1400 200 100 30]);
+    end
+    %checks to see if is a stable paramter set
+    if(real(eigVal(1,1)) < 0 && real(eigVal(2,2)) < 0)
+        uicontrol('Style', 'text', 'String', 'Stable', 'Position', [1400 125 100 20]);
+    else
+         uicontrol('Style', 'text', 'String', 'Unstable', 'Position', [1400 125 100 20]);
+    end
+    
 elseif menuchoice==2
     [t,y]=ode45(@derivativesEM, [0 250], [1e4, 0, 1e-6, 10 ], [], param);
     
 elseif menuchoice ==3
 %Solve the ODEs using function derivativesEMS
-[t,y]=ode45(@derivativesEMS, [0 250], [1e4, 0, 1e-6 ], [], param);
+    [t,y]=ode45(@derivativesEMS, [0 250], [1e4, 0, 1e-6 ], [], param);
 
 end
 

@@ -1,6 +1,6 @@
 %STABILITY ANALYSIS: Calculates the Jacobian of the target-cell-limited
 %model and determines if eigenvalues are imaginary.
-function [R_0, eigVal] = EigenvaluesTCL(param);
+function [R, eigVec, eigVal] = EigenvaluesTCL(param);
 param.betadash = (param.beta * param.p)/ param.c;
 
 R_0 = param.betadash*param.s/(param.d*param.delta)
