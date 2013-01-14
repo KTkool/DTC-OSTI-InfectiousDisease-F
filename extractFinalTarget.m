@@ -1,5 +1,5 @@
 %{
-Copyright 2013 Adam Berrington
+Copyright 2013 Kathryn Atwell
 	
 This file is part of DTC-OSTI-InfectiousDisease-F.
 
@@ -17,22 +17,11 @@ You should have received a copy of the GNU General Public License
 along with DTC-OSTI-InfectiousDisease-F. If not, see <http://www.gnu.org/licenses/>.
 %}
 
+function [ out ] = extractFinalTarget( t,y )
 
-function [] = PhasePlaneTCL(m,n);
-%PHASE PLOTS: Phase plotting the TCM model. m, n are input parameters
-%corresponding to 1 = T, 2 = I, 3 = V.
+%Takes as input the time vector and the struct y produced by ODE45.
+%Outputs final number of target cells.
+%
+%For use with paramSweepPlot
 
-if(m > 3 || n > 3 || m <= 0 || n <= 0)
-    disp('Enter values between 0 and 3');
-    return;
-end
-
-%solve the TCL condition
-params;
-[t, y] = ode45(@(t,y)derivativesTCL(t, y, param), [0, 250], [10000, 0, 1e-6]);
-
-
-plot(y(:,m), y(:,n));
-xlabel(m);
-ylabel(n);
-end
+out=y(end,1);
