@@ -1,35 +1,43 @@
-%{
-Copyright 2013 Adam Berrington
-	
-This file is part of DTC-OSTI-InfectiousDisease-F.
-
-DTC-OSTI-InfectiousDisease-F is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-DTC-OSTI-InfectiousDisease-F is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with DTC-OSTI-InfectiousDisease-F. If not, see <http://www.gnu.org/licenses/>.
-%}
-
-%STABILITY ANALYSIS: Calculates the stability criteria value R_0 for the
-%TCL system and also outputs Eigenvalues of Infected steady state.
-function [R_0, eigVal] = EigenvaluesTCL(param);
-param.betadash = (param.beta * param.p)/ param.c;
-
-R_0 = param.betadash*param.s/(param.d*param.delta);
+%STABILITY ANALYSIS: Calculates the Jacobian of the target-cell-limited
+%model and determines if eigenvalues are imaginary.
 
 Jacobian = [-param.betadash*param.s/param.delta, -param.delta; ...
             -param.betadash*param.s/param.delta - param.d, 0];
         
 [eigVec, eigVal] = eig(Jacobian);
 
+
+if(real(eigVal(1,1)) < 0 && real(eigVal(2,2)) < 0)
+    stability=1;
+    disp('This is a point of stability!');
+else
+    stability=0;
+    disp('This is not a point of stability!');
 end
+
+if(imag(eigVal(1,1)) ~= 0)
+    disp('(1,1) is an imaginary eigenvalue')
+else
+    disp('Not imaginary');
+end
+
+    
+if(imag(eigVal(2,2)) ~= 0)
+    disp('(2,2) is an imaginary eigenvalue')
+else
+    disp('Not imaginary');
+end
+
+%Test for consistency between two indicators of chronic infection:
+%1) Stability of infected steady state from jacobian
+%2) R0 > 1
+R_0 = param.betadash*param.s/(param.d*param.delta);
+
+if(R_0>1 && stability == 1)
+    
+disp('Something is wrong with your parameters');
+end
+
 
     
     

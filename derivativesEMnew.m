@@ -1,4 +1,4 @@
-function [ dy ] = derivativesEM( t,y, param )
+function [ dy ] = derivativesEMnew( t,y, param )
 %Calculates the derivatives for each equation in the extended model with quasi 
 %steady state approximation. 
 %To put themodel into a suitable form for MATLAB, each variable has been

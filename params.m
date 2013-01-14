@@ -1,23 +1,3 @@
-%{
-Copyright 2013 Kathryn Atwell
-	
-This file is part of DTC-OSTI-InfectiousDisease-F.
-
-DTC-OSTI-InfectiousDisease-F is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-DTC-OSTI-InfectiousDisease-F is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with DTC-OSTI-InfectiousDisease-F. If not, see <http://www.gnu.org/licenses/>.
-%}
-    
-
 %TCL model params
 
 %influx rate of target cells
@@ -34,11 +14,23 @@ param.delta = 0.5;
 
 
 %virus production rate
-param.p = 1000;
+param.p = 2000;
 
 %virus clearance rate 
 param.c = 3;
 
+%CD4+ cell production rate per day
+%param.p = 0.03;
+
+
+%Effectiveness of reverse transciptase inhibiton
+param.RTT = 1.0;
+
+%time of treatment start
+param.t_st = 50;
+
+
+param.PI = 0.9;
 %_________________________________________________________________________
 
 %Extended model params
@@ -67,3 +59,9 @@ param.d_E = 1;
 %Quasi steady state extended model params
 
 param.k = 1; %param.k0*param.a_E/param.d_E = 1;
+
+param.betadash = param.beta*param.p/param.c;
+
+%__________________________________________________________________________
+
+param.dr = 0.1;
