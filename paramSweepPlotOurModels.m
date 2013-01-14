@@ -28,7 +28,7 @@ along with DTC-OSTI-InfectiousDisease-F. If not, see <http://www.gnu.org/license
 %parameters
 
 params;
-param=rmfield(param,{'alpha','theta','k0','a_E','d_E','k','betadash','dr'});
+param=rmfield(param,{'alpha','theta','k0','a_E','d_E','k','betadash','dr','RTT','t_st','PI'});
 f1=figure;
 set(f1,'name','Target Cell Limited Model - effect of parameters on final virus titer','numbertitle','off')
 paramSweepPlot(param,@derivativesTCL,[10000,0,1e-6],@extractFinalVirus,10)
@@ -36,7 +36,7 @@ paramSweepPlot(param,@derivativesTCL,[10000,0,1e-6],@extractFinalVirus,10)
 fprintf('\n');
 
 params;
-param=rmfield(param,{'k','delta','betadash','dr'});
+param=rmfield(param,{'k','delta','betadash','dr','RTT','t_st','PI'});
 f2=figure;
 set(f2,'name','Extended Model - effect of parameters on final virus titer','numbertitle','off')
 paramSweepPlot(param,@derivativesEM,[10000,0,1e-6,100],@extractFinalVirus,10)
@@ -44,7 +44,7 @@ paramSweepPlot(param,@derivativesEM,[10000,0,1e-6,100],@extractFinalVirus,10)
 fprintf('\n');
 
 params;
-param=rmfield(param,{'k0','delta','a_E','d_E','betadash','dr'});
+param=rmfield(param,{'k0','delta','a_E','d_E','betadash','dr','RTT','t_st','PI'});
 f3=figure;
 set(f3,'name','Extended Simplified Model - effect of parameters on final virus titer','numbertitle','off')
 paramSweepPlot(param,@derivativesEMS,[10000,0,1e-6],@extractFinalVirus,10)
@@ -53,7 +53,7 @@ fprintf('\n');
 fprintf('\n');
 
 params;
-param=rmfield(param,{'alpha','theta','k0','a_E','d_E','k','betadash','dr'});
+param=rmfield(param,{'alpha','theta','k0','a_E','d_E','k','betadash','dr','RTT','t_st','PI'});
 f4=figure;
 set(f4,'name','Target Cell Limited Model - effect of parameters on final target cell count','numbertitle','off')
 paramSweepPlot(param,@derivativesTCL,[10000,0,1e-6],@extractFinalTarget,10)
@@ -61,7 +61,7 @@ paramSweepPlot(param,@derivativesTCL,[10000,0,1e-6],@extractFinalTarget,10)
 fprintf('\n');
 
 params;
-param=rmfield(param,{'k','delta','betadash','dr'});
+param=rmfield(param,{'k','delta','betadash','dr','RTT','t_st','PI'});
 f5=figure;
 set(f5,'name','Extended Model - effect of parameters on final target cell count','numbertitle','off')
 paramSweepPlot(param,@derivativesEM,[10000,0,1e-6,100],@extractFinalTarget,10)
@@ -69,7 +69,7 @@ paramSweepPlot(param,@derivativesEM,[10000,0,1e-6,100],@extractFinalTarget,10)
 fprintf('\n');
 
 params;
-param=rmfield(param,{'k0','delta','a_E','d_E','betadash','dr'});
+param=rmfield(param,{'k0','delta','a_E','d_E','betadash','dr','RTT','t_st','PI'});
 f6=figure;
 set(f6,'name','Extended Simplified Model - effect of parameters on final target cell count','numbertitle','off')
 paramSweepPlot(param,@derivativesEMS,[10000,0,1e-6],@extractFinalTarget,10);
