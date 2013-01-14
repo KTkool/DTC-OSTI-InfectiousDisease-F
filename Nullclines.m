@@ -8,10 +8,12 @@ clear
 params;
 %Calculates value at which I_3 asymtotes to infinity to plot around
 %this point P.
+param.betadash = (param.beta * param.p)/ param.c;
+
 P = (param.k + param.alpha*param.d)/param.betadash;
 P2 = floor(P*5.1);
 
-T = -3000:0.5:P2;
+T = -3000:1:P2;
 
 
 I_1 = 0;
@@ -21,9 +23,12 @@ I_2 = (param.s - param.d .* T)./(param.betadash .* T);
 I_3 = param.theta .* (param.betadash.*T - param.k)./(param.k + param.alpha.*param.d - param.betadash.*T);
 
 
-plot(T, I_1, 'k', T, I_2, 'b', T, I_3, 'g');
+plot(T, I_1, 'r', T, I_2, '--b',T, I_3, '-g' );
+legend('I=0','I_2','I_3');
+ylim([-125 125]);
 ylabel('I');
 xlabel('T');
-legend('I=0', 'I_2', 'I_3');
-ylim([-125 125]);
+
+
+
 
