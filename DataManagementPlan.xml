@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DataManagementPlan xmlns="http://www.miidi.org/dmp"
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xsi:schemaLocation="http://miidi.org/miidi http://www.miidi.org/schema"
+                    schemaVersion="0.1"
+                    dateVersion="2012-04-30">
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                            <personalProjectInformation>
+        
+        
+        
+    <personalInformation>
+            
+            
+            
+            
+        <FamilyName/>
+   <GivenName>Group F</GivenName>
+   <deparment/>
+   <researchSupervisor/>
+  </personalInformation>
+  <projectInformation>
+            
+            
+            
+            
+        <researchProjectTitle>DTC-OSTI Infectious disease phase1 project (based on http://dx.doi.org/10.1016/j.jtbi.2009.04.010) </researchProjectTitle>
+   <projectStartDate>10th Jan 2013</projectStartDate>
+   <studentship>
+                
+                
+            <studentshipIdentifier/>
+    <FundingAgencyStudentship/>
+   </studentship>
+   <grant>
+                
+                
+            <fundingAgencyName/>
+    <grantNumber/>
+   </grant>
+  </projectInformation>
+  <DataManagementPlan>
+            
+            
+            
+        <title>Phase 1 data management plan</title>
+   <creationDate>14th Jan 2013</creationDate>
+   <versionNumber>1</versionNumber>
+  </DataManagementPlan>
+ </personalProjectInformation>
+ <natureData>
+        
+        
+    <natureData>
+            
+            
+            
+            
+        <subjectDiscipline>Computational biology</subjectDiscipline>
+   <exactNatureData>Graphs of the solution to various systems of ODEs
+Graphs of model output as a function of each parameter</exactNatureData>
+   <dataFormat>MATLAB figure  .fig</dataFormat>
+   <dataFormat>PNG .png</dataFormat>
+   <dataOwnership>Collectively: Lucy Hutchinson, Adam Berrington, Kathryn Atwell, Ronja Woloszczuk and  Islom Nazarov</dataOwnership>
+  </natureData>
+  <dataDescriptions>
+            
+            
+        <DescriptionType>Each data file will have a section in the text file metadata containing accompanying information</DescriptionType>
+   <metadataCaptureMethod>Currently needs to be entered manually as new data files produced. Should be possible to write a MATLAB script to write metadata to the textfile automatically in future.</metadataCaptureMethod>
+  </dataDescriptions>
+ </natureData>
+ <dataSharingPublication>
+        
+        
+    <dataSharing>
+            
+        <dataSharingPrePublication>Data publicly available on GitHub</dataSharingPrePublication>
+  </dataSharing>
+  <DataPublication>
+            
+            
+            
+            
+            
+        <embargoDuration>No embargo</embargoDuration>
+   <reasonRestrictionAccess>Restricted only by licensing agreements to ensure proper attribution</reasonRestrictionAccess>
+   <dataSharingLicense>CC-BY 3.0</dataSharingLicense>
+   <persistentIdentifier>LaTeX report on GitHub contains preferred citation form.</persistentIdentifier>
+   <metadataProvision>Text file containing metadata for all graphs
+LaTeX report describing our results </metadataProvision>
+  </DataPublication>
+ </dataSharingPublication>
+ <dataStorageBackupArchiving>
+        
+        
+    <DataStorageBackup>
+            
+            
+            
+        <shortTermStorage>GitHub repository associated with the account of Kathryn Atwell</shortTermStorage>
+   <personResponsible>Kathryn Atwell</personResponsible>
+   <backupFrequency>Local copy of the repository is backed up on Kathryn Atwell's dropbox account, refreshed whenever I sync with the remote (daily).</backupFrequency>
+  </DataStorageBackup>
+  <DataArchiving>
+            
+            
+            
+            
+        <archiveLocation>GitHub</archiveLocation>
+   <secureArchiveDate>No plans to move to a secure archive beyond leaving it on GitHub</secureArchiveDate>
+   <personResponsible>Kathryn Atwell</personResponsible>
+   <methodDataTransfer>No plans to move to a secure archive beyond leaving it on GitHub</methodDataTransfer>
+  </DataArchiving>
+ </dataStorageBackupArchiving>
+ <FutureDataManagement>
+        
+    <futurePersonResponsible>Kathryn Atwell (data is associated with personal GitHub account) </futurePersonResponsible>
+ </FutureDataManagement>
+</DataManagementPlan>
