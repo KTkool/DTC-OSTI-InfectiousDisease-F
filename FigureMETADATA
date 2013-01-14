@@ -6,3 +6,12 @@ License: 		CC-BY 3.0
 Parameter values:	s=100, d=0.01, beta=1.3e-6, delta=0.5, p=2000, c=3, alpha=1, theta=3, k0=0.2, a_E=5, d_E=1, k=1
 Initial conditions:	T=10000, I=0, V=1e-6
 Description: Plots of model variables T, I, V against time for three models, target cell limited, extended and simplified extended.
+
+
+nullclines.fig
+Creator:		Adam Berrington
+Created using: 	Nullclines.m
+Date:			14/1/2013
+License: 		CC-BY 3.0
+Parameter values:	s=100, d=0.01, beta=1.3e-6, delta=0.5, p=2000, c=3, alpha=1, theta=3, k=1
+Description: Plots of nullclines I, V for EMS model.
