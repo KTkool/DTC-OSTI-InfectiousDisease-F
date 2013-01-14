@@ -196,6 +196,15 @@ function PlotGUI(hObject, eventdata)
         else %If treatment IS selected
             %Taking the end values of no treatment model at t_st, use as
             %input values to the treatment model
+            
+            set(E1, 'String', 'N/A');
+            set(E2, 'String', 'N/A');
+            set(E3, 'String', 'Stable/Unstable');
+            set(E4, 'String', 'Stability Parameter');
+            set(E5, 'String', '-');
+            set(E6, 'String','-');
+            
+            
             [t,y]=ode45(@derivativesTCL, [0 param.t_st], [1e4, 0, 1e-6 ], [], param);
             T0RT= y(end,1);
             I0RT = y(end,2); 
@@ -254,6 +263,13 @@ function PlotGUI(hObject, eventdata)
                 set(E2, 'String', 'E2');
             end
         else %Treatment IS selected
+            
+            set(E1, 'String', 'N/A');
+            set(E2, 'String', 'N/A');
+            set(E3, 'String', 'Stable/Unstable');
+            set(E4, 'String', 'Stability Parameter');
+            set(E5, 'String', '-');
+            set(E6, 'String','-');
             
             [t,y]=ode45(@derivativesEMS, [0 param.t_st], [1e4, 0, 1e-6 ], [], param);
             T0RT= y(end,1);
