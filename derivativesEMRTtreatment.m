@@ -20,6 +20,7 @@ along with DTC-OSTI-InfectiousDisease-F. If not, see <http://www.gnu.org/license
 function [ m ] = derivativesEMRTtreatment( t,y, param )
 %Calculates the derivatives for each equation in the extended model with quasi 
 %steady state approximation. 
+%In the model cells are sujected to reverse transcriptase treatment (RTT).
 %To put themodel into a suitable form for MATLAB, each variable has been
 %listed as a component in the solution vector y as follows:
 %

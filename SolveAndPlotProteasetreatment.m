@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 %{
 Copyright 2013 Ronja Woloszczuk
 
@@ -20,14 +21,21 @@ along with DTC-OSTI-InfectiousDisease-F. If not, see <http://www.gnu.org/license
 function [ y ] = SolveAndPlotRTtreatment()
 % Solves ODEs of models one and two using ODE45
 %   
+=======
+function [ y ] = SolveAndPlotProteasetreatment()
+% Solves  and plot ODEs of all three HIV infection models using ODE45
+% All functions assume subjection to PROTEASE INHIBITOR treatment after a time t_st
+% CD4D means that CD4 cells will die at a certain rate due to the drug
+% treatment
+>>>>>>> combined therapy, descriptions
 
 clear;
 params;
 
-%RTT=0.5;
+%SIMPLE MODEL
 
 [t,y]=ode45(@derivativesTCL, [0 param.t_st], [1e4, 0, 1e-6 ], [], param);
-T0RT= y(end,1);
+T0RT= y(end,1);%INITIAL CONITITIONS FOR TREATMENT
 
 I0RT = y(end,2); 
 
@@ -39,17 +47,19 @@ subplot(3,2,1);
 plot(t,y(:,1), 'b', t, y(:,2), 'k', t1,m(:,1), 'r', t1, m(:,2), 'g'); 
 xlabel('time(days)')
 ylabel('cell count/ml')
-title('Simple Model with ProteaseTtreatment')
-legend('targets', 'infected', 'targets - PT', 'infected - PT') 
+title('Simple Model with Protease Treatment')
+legend('targets', 'infected', 'targets - PI', 'infected - PI') 
 
 subplot(3,2,2); 
 semilogy(t, y(:,3), 'k', t1, m(:,3), 'b', t1, m(:,4), '--r'); 
 xlabel('time(days)')
 ylabel('virus titer/ml')
-legend('no PT', 'PT - infectious', 'PT - non-infectious') 
+legend('no PI', 'PI - infectious', 'PI - non-infectious') 
+
+%EXTENDED MODEL
 
 [t,y]=ode45(@derivativesEM, [0 param.t_st], [1e4, 0, 1e-6 ,10], [], param);
-T0RT= y(end,1);
+T0RT= y(end,1);%INITIAL CONITITIONS FOR TREATMENT
 
 I0RT = y(end,2); 
 
@@ -63,16 +73,18 @@ plot(t,y(:,1), 'k', t, y(:,2), 'b', t1,m(:,1), 'r', t1, m(:,2), 'g');
 xlabel('time(days)')
 ylabel('cell count/ml')
 title('Extended Model including Effector Cells with Protease Treatment')
-legend('targets', 'infected', 'targets - PT', 'infected - PT') 
+legend('targets', 'infected', 'targets - PI', 'infected - PI') 
 
 subplot(3,2,4); 
 semilogy(t, y(:,3), 'k', t1, m(:,3), 'b', t1, m(:,4), '--r'); 
 xlabel('time(days)')
 ylabel('virus titer/ml')
-legend('no PT', 'PT - infectious', 'PT - non-infectious') 
+legend('no PI', 'PI - infectious', 'PI - non-infectious') 
+
+%SIMPLIFIED EXTENDED MODEL
 
 [t,y]=ode45(@derivativesEMS, [0 param.t_st], [1e4, 0, 1e-6 ], [], param);
-T0RT= y(end,1);
+T0RT= y(end,1);%INITIAL CONITITIONS FOR TREATMENT
 
 I0RT = y(end,2); 
 
@@ -85,13 +97,13 @@ plot(t,y(:,1), 'k', t, y(:,2), 'b', t1,m(:,1), 'r', t1, m(:,2), 'g');
 xlabel('time(days)')
 ylabel('cell count/ml')
 title('Extended Simplified Model with Protease Treatment')
-legend('targets', 'infected', 'targets - PT', 'infected - PT')  
+legend('targets', 'infected', 'targets - PI', 'infected - PI')  
 
 subplot(3,2,6); 
 semilogy(t, y(:,3), 'k', t1, m(:,3), 'b', t1, m(:,4), '--r'); 
 xlabel('time(days)')
 ylabel('virus titer/ml')
-legend('no PT', 'PT - infectious', 'PT - non-infectious') 
+legend('no PI', 'PI - infectious', 'PI - non-infectious') 
 
 end
 

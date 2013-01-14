@@ -20,12 +20,17 @@ along with DTC-OSTI-InfectiousDisease-F. If not, see <http://www.gnu.org/license
 function [ m ] = derivativesEMProteasetreatment_CD4D( t,y, param )
 %Calculates the derivatives for each equation in the extended model with quasi 
 %steady state approximation. 
+%In the model cells are sujected to  protease (PI) treatment . Protease treatment results in the
+%production of infectious virus particles (VI) and non-infectious virus
+%particles (VNI).CD4D means that CD4 cells will die at a certain rate (dr) due to the drug
+% treatment
 %To put themodel into a suitable form for MATLAB, each variable has been
 %listed as a component in the solution vector y as follows:
 %
 % T = y(1) = Concentration of target cells
 % I = y(2) = Concentration of infected cells
-% V = y(3) = Serum virus concentration
+%VI = y(3) = Serum virus concentration (infectious)
+% VNI = y(3) = Serum virus concentration (non-infectious)
 % E = y(4) = Concentration of immune effector cells
 
 m = zeros(5,1);

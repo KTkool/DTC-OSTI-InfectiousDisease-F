@@ -18,13 +18,18 @@ along with DTC-OSTI-InfectiousDisease-F. If not, see <http://www.gnu.org/license
 %}
 
 function [ dy ] = derivativesTCLProteasetreatment( t, y, param )
-%Calculates the derivatives for each equation in the target cell limited model. 
+%Calculates the derivatives for each equation in the target cell limited model.
+%In the model cells are sujected to  protease (PI) treatment. Protease treatment results in the
+%production of infectious virus particles (VI) and non-infectious virus
+%particles (VNI).
 %To put themodel into a suitable form for MATLAB, each variable has been
 %listed as a component in the solution vector y as follows:
 %
 % T = y(1) = Concentration of target cells
 % I = y(2) = Concentration of infected cells
-% V = y(3) = Serum virus concentration
+% VI = y(3) = Serum virus concentration (infectious)
+% VNI = y(3) = Serum virus concentration (non-infectious)
+
 
 dy=zeros(4,1);
 dy(1) = param.s - param.d*y(1)- param.beta*y(1)*y(3);

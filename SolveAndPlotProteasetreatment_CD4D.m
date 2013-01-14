@@ -18,15 +18,19 @@ along with DTC-OSTI-InfectiousDisease-F. If not, see <http://www.gnu.org/license
 %}
 
 function [ y ] = SolveAndPlotProteasetreatment_CD4D()
-% Solves ODEs of models one and two using ODE45
-%   
+% Solves  and plot ODEs of all three HIV infection models using ODE45
+% All functions assume subjection to PROTEASE INHIBITOR treatment after a time t_st
+% CD4D means that CD4 cells will die at a certain rate due to the drug
+% treatment   
 
 clear;
 params;
 
+%SIMPLE MODEL
 
 [t,y]=ode45(@derivativesTCL, [0 param.t_st], [1e4, 0, 1e-6 ], [], param);
-T0RT= y(end,1);
+T0RT= y(end,1);%INITIAL CONITITIONS FOR TREATMENT
+
 
 I0RT = y(end,2); 
 
@@ -48,8 +52,11 @@ xlabel('time(days)')
 ylabel('virus titer/ml')
 legend('no PT', 'PT - infectious', 'PT - non-infectious', 'PT - infectious, CD4D', 'PT - non-infectious, CD4D') 
 
+%EXTENDED MODEL
+
 [t,y]=ode45(@derivativesEM, [0 param.t_st], [1e4, 0, 1e-6 ,10], [], param);
-T0RT= y(end,1);
+T0RT= y(end,1);%INITIAL CONITITIONS FOR TREATMENT
+
 
 I0RT = y(end,2); 
 
@@ -72,8 +79,9 @@ xlabel('time(days)')
 ylabel('virus titer/ml')
 legend('no PT', 'PT - infectious', 'PT - non-infectious', 'PT - infectious, CD4D', 'PT - non-infectious, CD4D') 
 
+%SIMPLYFIED EXTENDED MODEL
 [t,y]=ode45(@derivativesEMS, [0 param.t_st], [1e4, 0, 1e-6 ], [], param);
-T0RT= y(end,1);
+T0RT= y(end,1);%INITIAL CONITITIONS FOR TREATMENT
 
 I0RT = y(end,2); 
 

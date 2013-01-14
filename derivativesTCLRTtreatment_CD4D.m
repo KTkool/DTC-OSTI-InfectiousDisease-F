@@ -19,6 +19,7 @@ along with DTC-OSTI-InfectiousDisease-F. If not, see <http://www.gnu.org/license
 
 function [ dy ] = derivativesTCLRTtreatment_CD4D( t, y, param )
 %Calculates the derivatives for each equation in the target cell limited model. 
+%In the model cells are sujected to reverse transcriptase treatment (RTT).
 %To put themodel into a suitable form for MATLAB, each variable has been
 %listed as a component in the solution vector y as follows:
 %

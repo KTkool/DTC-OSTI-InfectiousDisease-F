@@ -12,12 +12,19 @@ param.beta = 1.3e-6;
 %infected cell loss rate, /day 
 param.delta = 0.5;
 
+<<<<<<< HEAD
 %virus production rate, RNAcopies/cell/day
 param.p = 2000;
+=======
+
+%virus production rate
+param.p = 1000;
+>>>>>>> combined therapy, descriptions
 
 %virus clearance rate, /day
 param.c = 3;
 
+<<<<<<< HEAD
 %______________________________________________________________________%
 
 %Extra parameters for model with treatment 
@@ -33,6 +40,9 @@ param.RTT = 1.0;
 param.t_st = 50;
 
 param.PI = 0.9;
+=======
+
+>>>>>>> combined therapy, descriptions
 %_________________________________________________________________________
 
 %Extended model params
@@ -70,4 +80,14 @@ param.betadash = param.beta*param.p/param.c;
 
 %__________________________________________________________________________
 
-param.dr = 0.1;
+%Effectiveness of reverse transciptase inhibiton
+param.RTT = 0.8;
+
+%time of treatment start
+param.t_st = 75;
+
+%Effectiveness of protease inhibiton
+param.PI = 0.8;
+
+%death rate of CD4 cells due to treatment 
+param.dr = 0.0;

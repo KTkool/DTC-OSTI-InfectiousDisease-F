@@ -20,6 +20,9 @@ along with DTC-OSTI-InfectiousDisease-F. If not, see <http://www.gnu.org/license
 function [ m ] = derivativesEMRTtreatment_CD4D( t,y, param )
 %Calculates the derivatives for each equation in the extended model with quasi 
 %steady state approximation. 
+%In the model cells are sujected to reverse transcriptase treatment (RTT). 
+%CD4D means that CD4 cells will die at a certain rate (dr) due to the drug
+% treatment
 %To put themodel into a suitable form for MATLAB, each variable has been
 %listed as a component in the solution vector y as follows:
 %
