@@ -75,6 +75,7 @@ void rk4Step(
         const double *currentStep, 
         double *nextStep)
 {
+    int i;
     double *const k1 = (double*)malloc(sizeof(double)*numberVariables);
     double *const k2 = (double*)malloc(sizeof(double)*numberVariables);
     double *const k3 = (double*)malloc(sizeof(double)*numberVariables);
@@ -83,7 +84,6 @@ void rk4Step(
     double *const derivInput = (double*)malloc(sizeof(double)*numberVariables);
     double *const derivOutput = (double*)malloc(sizeof(double)*numberVariables);
     
-    unsigned int i;
     
     odeFunction(t,currentStep,derivOutput);
     for(i=0; i<numberVariables; i++){
@@ -122,30 +122,38 @@ void rk4Step(
 void mexFunction (int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
 {
     
+    /*N = Number of steps to take*/
+    int N;
+    int i; 
+    double h;
+    mxArray* t;
+    mwSize numberVariables;
+    double* times;
+    mxArray* y;
+    double* solution;
+    mxArray* yTranspose;
+    
     /*Read inputs*/
     double* timeRange = mxGetPr(prhs[0]);
-    
     double* initialConditions = mxGetPr(prhs[1]);
     
     odeInit(prhs[2]);
     
-    /*N = Number of steps to take*/
-    unsigned int N=5000;
-    double h=(timeRange[1]-timeRange[0])/(double)N;
-    unsigned int i; 
-    const mwSize numberVariables = mxGetDimensions(prhs[1])[1];
+    N=5000;
+    h=(timeRange[1]-timeRange[0])/(double)N;
+    numberVariables = mxGetDimensions(prhs[1])[1];
     
     
     /*Enter timepoints*/
-    mxArray* t = mxCreateDoubleMatrix(N,1,mxREAL); 
-    double* times = mxGetPr(t);
+    t = mxCreateDoubleMatrix(N,1,mxREAL); 
+    times = mxGetPr(t);
     for(i=0; i<N; i++){
         times[i]=timeRange[0]+i*h;
     }
 
     /*Make y vector and initialise*/    
-    mxArray* y = mxCreateDoubleMatrix(numberVariables,N,mxREAL);
-    double* solution = mxGetPr(y);
+    y = mxCreateDoubleMatrix(numberVariables,N,mxREAL);
+    solution = mxGetPr(y);
     for(i=0; i<numberVariables; i++){
         solution[i] = initialConditions[i]; 
     }
@@ -161,7 +169,7 @@ void mexFunction (int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
                 solution+(i+1)*numberVariables);
     }
     
-    mxArray* yTranspose = mxCreateDoubleMatrix(N,numberVariables,mxREAL);
+    yTranspose = mxCreateDoubleMatrix(N,numberVariables,mxREAL);
     mexCallMATLAB(1,&yTranspose,1,&y,"transpose");
     mxDestroyArray(y);
     
