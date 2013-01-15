@@ -84,3 +84,12 @@ param.PI = 0.8;
 
 %death rate of CD4 cells due to treatment 
 param.dr = 0.0;
+
+%__________________________________________________________________________
+
+% parameters for the resistance functions
+param.fOn  = @(t,y,p) resistanceExp(t,y,p,3);
+param.fOff = @(t,y,p) resistanceExp(t,y,p,-2);
+param.gOn  = @(t,y,p) resistanceExp(t,y,p,10);
+param.gOff = @(t,y,p) resistanceExp(t,y,p,-3);
+
