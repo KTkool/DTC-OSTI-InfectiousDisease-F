@@ -28,11 +28,11 @@ params;
 
 %SIMPLE MODEL
 [t,y]=ode45(@derivativesTCL, [0 param.t_st], [1e4, 0, 1e-6 ], [], param);
-T0RT= y(end,1);%INITIAL CONITITIONS FOR TREATMENT
-
+T0RT= y(end,1); %initial conditions for treatment
 I0RT = y(end,2); 
-
 V0RT = y(end,3);
+% THIS IS A CLUMSY WAY OF DOING IT, CONSIDER REVISING. AKM
+
 [t,y]=ode45(@derivativesTCL, [0 250], [1e4, 0, 1e-6 ], [], param);
 [t1,m]=ode45(@derivativesTCLCombinationtreatment_CD4D, [param.t_st 250], [T0RT I0RT V0RT 0], [], param);
 
@@ -52,13 +52,11 @@ legend('no Combination', 'Combination' )
 %EXTENDED MODEL
 
 [t,y]=ode45(@derivativesEM, [0 param.t_st], [1e4, 0, 1e-6 ,10], [], param);
-T0RT= y(end,1); %INITIAL CONITITIONS FOR TREATMENT
-
+T0RT= y(end,1);     %initial conditions for treatment
 I0RT = y(end,2); 
-
 V0RT = y(end,3);
-
 E0RT = y(end,4);
+
 [t,y]=ode45(@derivativesEM, [0 250], [1e4, 0, 1e-6 ,10], [], param);
 [t1,m]=ode45(@derivativesEMCombinationtreatment_CD4D, [param.t_st 250], [T0RT I0RT V0RT 0 E0RT], [], param);
 

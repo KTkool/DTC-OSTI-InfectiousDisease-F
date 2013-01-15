@@ -28,11 +28,15 @@ param.c = 3;
 
 %Effectiveness of reverse transciptase inhibiton
 param.RTT = 1.0;
+% !!! THIS WE NEED TO REMOVE FOR OUR MODEL!!! AKM
+% !!! LATER OVERWRITTEN WITH 0.8!!! AKM
 
 %time of treatment start
 param.t_st = 50;
+% !!! LATER OVERWRITTEN WITH 75!!! AKM
 
 param.PI = 0.9;
+% !!!LATER OVERWRITTEN WITH 0.8!!!
 
 %Extended model params
 
