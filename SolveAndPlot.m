@@ -18,22 +18,26 @@ along with DTC-OSTI-InfectiousDisease-F. If not, see <http://www.gnu.org/license
 %}
 
 function [ y ] = SolveAndPlot()
-% Solves ODEs of models one and two using ODE45
+% Solves ODEs of models 1,2 and 3 using ODE45 with RT Treatment
 %   
+
+% ANSWERME
+% ???What is the difference between this and SolveAndPlotRTtreatmen.m???
+% maybe we should change it, so that it does 'no treatment'
 
 clear;
 params;
 
 %RTT=0.5;
 
-[t,y]=ode45(@derivativesTCL, [0 param.t_st], [1e4, 0, 1e-6 ], [], param);
-T0RT= y(end,1);
+%% TCL
 
-I0RT = y(end,2); 
-
+[t,y] = ode45(@derivativesTCL, [0 param.t_st], [1e4, 0, 1e-6 ], [], param);
+T0RT = y(end,1);
+I0RT = y(end,2);
 V0RT = y(end,3);
 
-[t1,m]=ode45(@derivativesTCLRTtreatment, [param.t_st 250], [T0RT I0RT V0RT], [], param);
+[t1,m] = ode45(@derivativesTCLRTtreatment, [param.t_st 250], [T0RT I0RT V0RT], [], param);
 
 subplot(3,2,1);
 plot(t,y(:,1), 'r', t, y(:,2), 'g', t1,m(:,1), 'r', t1, m(:,2), 'g'); 
@@ -47,13 +51,12 @@ semilogy(t, y(:,3), 'k', t1, m(:,3), 'k');
 xlabel('time(days)')
 ylabel('virus titer')
 
+%% EM
+
 [t,y]=ode45(@derivativesEM, [0 param.t_st], [1e4, 0, 1e-6 ,10], [], param);
 T0RT= y(end,1);
-
-I0RT = y(end,2); 
-
+I0RT = y(end,2);
 V0RT = y(end,3);
-
 E0RT = y(end,4);
 
 [t1,m]=ode45(@derivativesEMRTtreatment, [param.t_st 250], [T0RT I0RT V0RT E0RT], [], param);
@@ -69,11 +72,11 @@ semilogy(t, y(:,3), 'k', t1, m(:,3), 'k');
 xlabel('time(days)')
 ylabel('virus titer')
 
+%% EMS
+
 [t,y]=ode45(@derivativesEMS, [0 param.t_st], [1e4, 0, 1e-6 ], [], param);
 T0RT= y(end,1);
-
 I0RT = y(end,2); 
-
 V0RT = y(end,3);
 
 [t1,m]=ode45(@derivativesEMSRTtreatment, [param.t_st 250], [T0RT I0RT V0RT], [], param);
