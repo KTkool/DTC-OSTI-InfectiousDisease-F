@@ -1,4 +1,4 @@
-function fval = resistancePILogistic( t, y, param, k)
+function fval = resistancePILogistic( t, y, param,k)
 % gives the resistance against the drug
 % yes, it actually does!, to code up drug effectiveness we need
 % param.RTT-the value obtained from solving this differential equation.

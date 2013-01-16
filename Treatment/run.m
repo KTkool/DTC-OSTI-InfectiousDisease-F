@@ -1,7 +1,10 @@
 % a run
 
 params;
-treatment=alternatingDrugs(1000,50);
+%treatment=alternatingDrugs(2000,50);
+treatment.stepLengths = [100 1000];
+treatment.drug1 = [0 0];
+treatment.drug2 = [0 0];
 [t,y]=processTreatment(treatment,[1000,10,0.0001,0.1,0.1],param);
 subplot(2,2,1)
 plot(t,y(:,1))
