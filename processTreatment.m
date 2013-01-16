@@ -18,3 +18,6 @@ for i=1:length(treatment.stepLengths)
 end;
 
 end
+
+
+% initial conditions y(4) and y(5) = 0.012 ish
