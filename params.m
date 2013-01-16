@@ -88,7 +88,7 @@ param.dr = 0.0;
 %__________________________________________________________________________
 
 % parameters for the resistance functions
-param.fOn  = @(t,y,p) resistanceRTTLogistic(t,y,p,0.2);
-param.fOff = @(t,y,p) resistanceRTTLogistic(t,y,p,-0.1);
-param.gOn  = @(t,y,p) resistancePILogistic(t,y,p,0.3);
-param.gOff = @(t,y,p) resistancePILogistic(t,y,p,-0.2);
+param.fOn  = @(t,y,p) resistanceRTTLogistic(t,y,p,0.02);
+param.fOff = @(t,y,p) resistanceRTTLogistic(t,y,p,-0.001);
+param.gOn  = @(t,y,p) resistancePILogistic(t,y,p,0.03);
+param.gOff = @(t,y,p) resistancePILogistic(t,y,p,-0.002);

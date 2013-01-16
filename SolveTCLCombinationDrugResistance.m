@@ -19,7 +19,7 @@ else
     g = param.gOn;
 end;
 
-derivatives = @(t,y) derivativesTCLCombinationDrugResistance(t,y,param,f,g);
+derivatives = @(t,y) derivativesTCLCombinationDrugResistance(t,y,param,f,g,drug1On,drug2On);
 [t,y] = ode45(derivatives, [0 resolutionDomain], initialConditions);
 
 end
