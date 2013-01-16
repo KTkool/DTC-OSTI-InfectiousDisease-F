@@ -34,9 +34,9 @@ function [ dy ] = derivativesTCLCombinationDrugResistance( t, y, param, f, g )
 % g = y(5) = dPI/dt
 
 dy = zeros(5,1);
-dy(1) = param.s - (param.dr + param.d) * y(1) - (1-y(4)) * param.beta * y(1) * y(3);
-dy(2) = (1-y(4)) * param.beta * y(1) * y(3) - (param.dr + param.delta) * y(2);
-dy(3) = (1 - y(5)) * param.p * y(2) - param.c * y(3);
+dy(1) = param.s - (param.dr + param.d) * y(1) - (1-param.RTT + y(4)) * param.beta * y(1) * y(3);
+dy(2) = (1-param.RTT + y(4)) * param.beta * y(1) * y(3) - (param.dr + param.delta) * y(2);
+dy(3) = (1 - param.PI + y(5)) * param.p * y(2) - param.c * y(3);
 %dy(3) = (1 - y(5)) * param.delta * param.p * y(2) - param.c * y(3);
 % PARAM.DELTA MIGHT BE WRONG HERE
 dy(4) = f(t, y, param);  

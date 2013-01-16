@@ -73,14 +73,14 @@ param.betadash = param.beta*param.p/param.c;
 
 %__________________________________________________________________________
 
-%Effectiveness of reverse transciptase inhibiton
-param.RTT = 0.8;
+%Effectiveness of reverse transciptase inhibition
+param.RTT = 0.08;
 
 %time of treatment start
 param.t_st = 75;
 
 %Effectiveness of protease inhibiton
-param.PI = 0.8;
+param.PI = 0.08;
 
 %death rate of CD4 cells due to treatment 
 param.dr = 0.0;
@@ -88,8 +88,7 @@ param.dr = 0.0;
 %__________________________________________________________________________
 
 % parameters for the resistance functions
-param.fOn  = @(t,y,p) resistanceExp(t,y,p,3);
-param.fOff = @(t,y,p) resistanceExp(t,y,p,-2);
-param.gOn  = @(t,y,p) resistanceExp(t,y,p,10);
-param.gOff = @(t,y,p) resistanceExp(t,y,p,-3);
-
+param.fOn  = @(t,y,p) resistanceRTTLogistic(t,y,p,0.2);
+param.fOff = @(t,y,p) resistanceRTTLogistic(t,y,p,-0.1);
+param.gOn  = @(t,y,p) resistancePILogistic(t,y,p,0.3);
+param.gOff = @(t,y,p) resistancePILogistic(t,y,p,-0.2);
