@@ -88,10 +88,10 @@ param.dr = 0.0;
 %__________________________________________________________________________
 
 % parameters for the resistance functions
-param.fOn  = @(t,y,p) resistanceRTTLogarithmic(t,y,p,0.003);     % 0.02
-param.fOff = @(t,y,p) resistanceRTTLogarithmic(t,y,p,-0.05);   % -0.001
-param.gOn  = @(t,y,p) resistancePILogarithmic(t,y,p,0.003);      % 0.03
-param.gOff = @(t,y,p) resistancePILogarithmic(t,y,p,-0.05);    % -0.002
+param.fOn  = @(t,y,p) resistanceRTTLogarithmic(t,y,p,0.03);     % 0.02
+param.fOff = @(t,y,p) resistanceRTTLogarithmic(t,y,p,-0.03);   % -0.001
+param.gOn  = @(t,y,p) resistancePILogarithmic(t,y,p,0.03);      % 0.03
+param.gOff = @(t,y,p) resistancePILogarithmic(t,y,p,-0.03);    % -0.002
 
 
 
