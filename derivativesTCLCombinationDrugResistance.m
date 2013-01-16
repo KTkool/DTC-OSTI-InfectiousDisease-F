@@ -33,12 +33,27 @@ function [ dy ] = derivativesTCLCombinationDrugResistance( t, y, param, f, g, dr
 % f = y(4) = dRTT/dt
 % g = y(5) = dPI/dt
 
+% TCL model
+% dy = zeros(5,1);
+% dy(1) = param.s - (param.dr + param.d) * y(1) - (1-param.RTT*drug1On + y(4)) * param.beta * y(1) * y(3);
+% param.dr should not be in our model
+% dy(2) = (1-param.RTT*drug1On + y(4)) * param.beta * y(1) * y(3) - (param.dr + param.delta) * y(2);
+% dy(3) = (1 - param.PI*drug2On + y(5)) * param.p * y(2) - param.c * y(3);
+% %dy(3) = (1 - y(5)) * param.delta * param.p * y(2) - param.c * y(3);
+% % PARAM.DELTA MIGHT BE WRONG HERE
+% dy(4) = f(t, y, param);  
+% dy(5) = g(t, y, param);
+
 dy = zeros(5,1);
-dy(1) = param.s - (param.dr + param.d) * y(1) - (1-param.RTT*drug1On + y(4)) * param.beta * y(1) * y(3);
-dy(2) = (1-param.RTT*drug1On + y(4)) * param.beta * y(1) * y(3) - (param.dr + param.delta) * y(2);
-dy(3) = (1 - param.PI*drug2On + y(5)) * param.p * y(2) - param.c * y(3);
+dy(1) = param.s - param.d * y(1) - (1 - (param.RTT + y(4))*drug1On) * param.beta * y(1) * y(3);
+dy(2) = (1 - (param.RTT+ y(4))*drug1On) * param.beta * y(1) * y(3) ...
+    - (param.alpha*param.d + param.k*y(2)/(y(2)+param.theta)) * y(2);
+dy(3) = (1 - (param.PI + y(5))*drug2On) * param.p * y(2) - param.c * y(3);
 %dy(3) = (1 - y(5)) * param.delta * param.p * y(2) - param.c * y(3);
 % PARAM.DELTA MIGHT BE WRONG HERE
 dy(4) = f(t, y, param);  
 dy(5) = g(t, y, param);
+
+
+
 end
