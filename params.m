@@ -74,13 +74,13 @@ param.betadash = param.beta*param.p/param.c;
 %__________________________________________________________________________
 
 %Effectiveness of reverse transciptase inhibition
-param.RTT = 0.08;
+param.RTT = 0.8;
 
 %time of treatment start
 param.t_st = 75;
 
 %Effectiveness of protease inhibiton
-param.PI = 0.08;
+param.PI = 0.8;
 
 %death rate of CD4 cells due to treatment 
 param.dr = 0.0;

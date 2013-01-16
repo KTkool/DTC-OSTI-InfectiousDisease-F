@@ -41,5 +41,4 @@ dy(3) = (1 - param.PI + y(5)) * param.p * y(2) - param.c * y(3);
 % PARAM.DELTA MIGHT BE WRONG HERE
 dy(4) = f(t, y, param);  
 dy(5) = g(t, y, param);
-
 end
