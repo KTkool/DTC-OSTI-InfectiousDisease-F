@@ -1,9 +1,9 @@
 function [ treatment ] = fourierTreatment(param,initialConditions,duration)
 
-basisSize = 50;
+basisSize = 10;
 %Main assumption : the treament is going to be periodic.
-nIter = 200;
-epsilon = 0.5;
+nIter = 20;
+epsilon = 0.01;
 %Use a constant learning rate
 learningRate = 0.01;
 %Idea is simple : start with no treatment ; then do stochastic gradient
@@ -15,10 +15,10 @@ bn1 = range.*rand(basisSize,1);
 an2 = range.*rand(basisSize,1);
 bn2 = range.*rand(basisSize,1);
 
-%Start treament 40 days after infection
-offset = 40;
+%Start treament 100 days after infection
+offset = 100;
 
-nSteps = 20;
+nSteps = 10;
 stepLength = floor(duration/nSteps);
 duration = nSteps;
 offset = floor(offset/stepLength);
