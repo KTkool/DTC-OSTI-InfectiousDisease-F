@@ -8,16 +8,12 @@ tol = 0.05;
 f = [];
 g = [];
 if ((drug1On < tol) && (drug2On < tol))
-    drug1On = 0;
-    drug2On = 0;
    f = param.fOff;
    g = param.gOff;
 elseif ((drug1On >= tol) && (drug2On < tol))
-    drug2On = 0;
     f = param.fOn;
     g = param.gOff;
 elseif ((drug1On < tol) && (drug2On >= tol))
-    drug1On = 0;
     f = param.fOff;
     g = param.gOn;
 else
