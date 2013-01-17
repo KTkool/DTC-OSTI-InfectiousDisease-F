@@ -51,8 +51,14 @@ dy(2) = (1 - (param.RTT+ y(4))*drug1On) * param.beta * y(1) * y(3) ...
 dy(3) = (1 - (param.PI + y(5))*drug2On) * param.p * y(2) - param.c * y(3);
 %dy(3) = (1 - y(5)) * param.delta * param.p * y(2) - param.c * y(3);
 % PARAM.DELTA MIGHT BE WRONG HERE
-dy(4) = f(t, y, param);  
-dy(5) = g(t, y, param);
+if (drug1On == 0)
+    drug1On = 1;
+end
+if (drug2On == 0)
+    drug2On = 1;
+end
+dy(4) = f(t, y, param)*drug1On;  
+dy(5) = g(t, y, param)*drug2On;
 
 
 

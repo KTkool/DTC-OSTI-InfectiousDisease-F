@@ -2,6 +2,9 @@ function treatment = thresholdTreatment(param, initialConditions, duration, thre
 %Treatment that takes decisions iteratively : if we are below the threshold do nothing
 %if above : take treatment using drug with the lowest resistance
 
+%Note : This file is here for historical reasons and output results.
+%They are, however, completely meaningless.
+
 nTimeSteps = 40;
 
 %Start by doing nothing...
@@ -31,5 +34,4 @@ for i=2:nTimeSteps
    end
    
 end
-
 end
