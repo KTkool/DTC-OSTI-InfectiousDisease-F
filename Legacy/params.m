@@ -11,11 +11,10 @@ param.beta = 1.3e-6;
 
 %infected cell loss rate, /day 
 param.delta = 0.5;
-
-%virus production rate, RNAcopies/cell/day
-param.p = 2000;
-
 % combined therapy, descriptions
+
+%virus production rate
+param.p = 2000;
 
 %virus clearance rate, /day
 param.c = 3;
@@ -30,13 +29,14 @@ param.c = 3;
 
 %Effectiveness of reverse transciptase inhibiton
 param.RTT = 1.0;
+% !!! THIS WE NEED TO REMOVE FOR OUR MODEL!!! AKM
+% !!! LATER OVERWRITTEN WITH 0.8!!! AKM
 
 %time of treatment start
 param.t_st = 50;
+% !!! LATER OVERWRITTEN WITH 75!!! AKM
 
 param.PI = 0.9;
-
-%_________________________________________________________________________
 
 %Extended model params
 
@@ -73,7 +73,7 @@ param.betadash = param.beta*param.p/param.c;
 
 %__________________________________________________________________________
 
-%Effectiveness of reverse transciptase inhibiton
+%Effectiveness of reverse transciptase inhibition
 param.RTT = 0.8;
 
 %time of treatment start
@@ -84,3 +84,5 @@ param.PI = 0.8;
 
 %death rate of CD4 cells due to treatment 
 param.dr = 0.0;
+
+%__________________________________________________________________________

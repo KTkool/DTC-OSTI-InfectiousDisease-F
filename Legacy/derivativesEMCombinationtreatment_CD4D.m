@@ -41,11 +41,13 @@ m(1) = param.s-(param.dr + param.d)*y(1)-(1-param.RTT)*param.beta*y(1)*y(3);
 m(2) = (1-param.RTT)*param.beta*y(1)*y(3)-(param.dr + param.alpha*param.d + param.k0*y(4))*y(2);
 
 m(3) = (1- param.PI)*param.alpha*param.d*param.p*y(2)-param.c*y(3);
+% !!! WOAW WHAT ALL ALL THESE PARAMETERS DOING THERE???? AKM
 
 m(4) = param.PI* param.alpha *param.d *param.p*y(2)-param.c*y(4);
+% !!! SAME HERE!!!
 
 m(5) = param.a_E*y(2)/(param.theta+y(2))-param.d_E*y(5);
 
-
-
 end
+
+% ??? WHAT DO WE TRUST? THE CODE THE REPORT OR OUR INSTINCT???

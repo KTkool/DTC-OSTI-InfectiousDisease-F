@@ -1,0 +1,12 @@
+Here are the ideas we just had
+
+extending current treatment models:
+-make treatment efficiency timedependent to accomodate viral adaptation through mutation
+--stochastic
+--deterministic
+-different treatment patterns
+--alternating treatments
+--all drugs at the same time
+-adding more treatments
+--other drugs currently in development or in use
+--vaccination

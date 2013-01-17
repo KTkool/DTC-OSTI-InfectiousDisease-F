@@ -38,3 +38,6 @@ dy(3) = (1 - param.PI)*param.delta*param.p*y(2)-param.c*y(3);
 dy(4) = param.PI*param.delta*param.p*y(2)-param.c*y(4);
 
 end
+
+% !!! in line 37 param.delta should probably not be there.
+% the fourth ODE decouples, we should construst our system without it. AKM
