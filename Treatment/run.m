@@ -21,9 +21,9 @@ along with DTC-OSTI-group-A. If not, see <http://www.gnu.org/licenses/>.
 
 params;
 %treatment=alternatingDrugs(2000,50);
-treatment.stepLengths = [100 200 500];
-treatment.drug1 = [0 0 0];
-treatment.drug2 = [0 0 0];
+treatment.stepLengths = [100 500 300 1000];
+treatment.drug1 = [0 0.5 0.4 0];
+treatment.drug2 = [0 0.5 0.4 0];
 [t,y]=processTreatment(treatment,[1000,10,0.0001,0.1,0.1],param);
 subplot(2,2,1)
 plot(t,y(:,1))

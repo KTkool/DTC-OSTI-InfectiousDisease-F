@@ -21,8 +21,8 @@ function [ treatment ] = fourierTreatment(param,initialConditions,duration)
 
 basisSize = 10;
 %Main assumption : the treament is going to be periodic.
-nIter = 10;
-epsilon = 0.1;
+nIter = 20;
+epsilon = 0.01;
 %Use a constant learning rate
 learningRate = 0.01;
 %Idea is simple : start with no treatment ; then do stochastic gradient

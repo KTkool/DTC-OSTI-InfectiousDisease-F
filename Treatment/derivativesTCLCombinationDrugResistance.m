@@ -44,6 +44,11 @@ function [ dy ] = derivativesTCLCombinationDrugResistance( t, y, param, f, g, dr
 % dy(4) = f(t, y, param);  
 % dy(5) = g(t, y, param);
 
+%Threshold : If the concentration of a drug is below this threshold
+%then we consider that the resistance to it is decreasing at a speed
+%whihch is proportional to its concentration
+tol = 0.05;
+
 dy = zeros(5,1);
 dy(1) = param.s - param.d * y(1) - (1 - (param.RTT + y(4))*drug1On) * param.beta * y(1) * y(3);
 dy(2) = (1 - (param.RTT+ y(4))*drug1On) * param.beta * y(1) * y(3) ...
@@ -51,15 +56,35 @@ dy(2) = (1 - (param.RTT+ y(4))*drug1On) * param.beta * y(1) * y(3) ...
 dy(3) = (1 - (param.PI + y(5))*drug2On) * param.p * y(2) - param.c * y(3);
 %dy(3) = (1 - y(5)) * param.delta * param.p * y(2) - param.c * y(3);
 % PARAM.DELTA MIGHT BE WRONG HERE
-if (drug1On == 0)
-    drug1On = 1;
+if (drug1On < tol)
+    drug1On = (tol - drug1On)/tol;
 end
-if (drug2On == 0)
-    drug2On = 1;
+if (drug2On < tol)
+    drug2On = (tol - drug2On)/tol;
 end
-dy(4) = f(t, y, param)*drug1On;  
-dy(5) = g(t, y, param)*drug2On;
 
+if y(4)>= 0
+    dy(4) = f(t, y, param)*drug1On;  
+else
+    dy(4) = 0.001;
+end
 
+if y(5)>= 0
+    dy(5) = g(t, y, param)*drug2On;  
+else
+    dy(5) = 0.001;
+end
+
+if y(4) >= param.RTT
+    dy(4) = -0.00001 %min(0,f(t, y, param)*drug1On);  
+else
+    dy(4) = f(t, y, param)*drug1On;  
+end
+
+if y(5) >= param.PI
+    dy(5) = -0.0001 %min(0,g(t, y, param)*drug2On);  
+else
+    dy(5) = g(t, y, param)*drug2On;  
+end
 
 end
