@@ -17,11 +17,42 @@ You should have received a copy of the GNU General Public License
 along with DTC-OSTI-group-A. If not, see <http://www.gnu.org/licenses/>.
 %}
 
-function fval = resistancePILogistic( t, y, param,k)
-% gives the resistance against the drug
-% yes, it actually does!, to code up drug effectiveness we need
-% param.RTT-the value obtained from solving this differential equation.
-% I can give you closed form for these equations, but that will be a bit of
-% a pain to implement with initial conditions. AKM
-fval = k*y(5)*(1-y(5)/param.PI);
-end
+close all
+
+
+figure
+
+subplot(2,2,1)
+plot(t,y(:,1), 'k')
+ylim( [0,10000] );
+title('Target Cells')
+xlabel('days')
+ylabel('cells/ml')
+%hold on
+%area([100 200], [max(y(:,1)) max(y(:,1))]);
+
+subplot(2,2,2)
+plot(t,y(:,2), 'k')
+%ylim( [0,10000] );
+title('Infected Cells')
+xlabel('days')
+ylabel('cells/ml')
+
+subplot(2,2,3)
+plot(t,y(:,3), 'k')
+title('Virus titre')
+xlabel('days')
+ylabel('RNAcopies/ml')
+
+subplot(2,2,4)
+plot(t,y(:,4), 'b-'), hold on
+plot(t,y(:,5), 'r--'), hold on
+%ylim([0 1])
+%plot(seq,y(seq,4), 'bo'), hold on
+%plot(seq,y(seq,5), 'rx'), hold on
+title('Resistance')
+xlabel('days')
+ylabel('resistance')
+legend('drug1','drug2', 'Location', 'NorthWest')
+
+

@@ -1,9 +1,28 @@
+%{
+Copyright 2013 A-team
+
+This file is part of DTC-OSTI-group-A.
+
+DTC-OSTI-group-A is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+DTC-OSTI-group-A is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with DTC-OSTI-group-A. If not, see <http://www.gnu.org/licenses/>.
+%}
+
 function [ treatment ] = fourierTreatment(param,initialConditions,duration)
 
-basisSize = 50;
+basisSize = 10;
 %Main assumption : the treament is going to be periodic.
-nIter = 200;
-epsilon = 0.5;
+nIter = 10;
+epsilon = 0.1;
 %Use a constant learning rate
 learningRate = 0.01;
 %Idea is simple : start with no treatment ; then do stochastic gradient
@@ -15,10 +34,10 @@ bn1 = range.*rand(basisSize,1);
 an2 = range.*rand(basisSize,1);
 bn2 = range.*rand(basisSize,1);
 
-%Start treament 40 days after infection
-offset = 40;
+%Start treament 100 days after infection
+offset = 100;
 
-nSteps = 20;
+nSteps = 10;
 stepLength = floor(duration/nSteps);
 duration = nSteps;
 offset = floor(offset/stepLength);
